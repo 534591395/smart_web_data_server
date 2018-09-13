@@ -1,0 +1,83 @@
+{
+  "name": "smart_web_data_server",
+  "version": "0.0.1",
+  "description": "smart_web_data_server 是一个智能的数据分析平台",
+  "scripts": {
+    "clean": "easy clean",
+    "build": "easy build prod",
+    "debug": "egg-bin debug",
+    "dev": "egg-bin dev",
+    "start": "egg-scripts start",
+    "lint": "eslint .",
+    "fix": "eslint --fix .",
+    "ii": "npm install --registry https://registry.npm.taobao.org",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+  },
+  "dependencies": {
+    "cross-env": "^5.0.0",
+    "egg": "^2.2.1",
+    "egg-sequelize": "^4.1.0",
+    "mysql2": "^1.6.1",
+    "egg-cors": "^2.0.0",
+    "egg-logger": "^1.5.0",
+    "egg-scripts": "^2.8.1",
+    "egg-validate": "^1.0.0",
+    "egg-view-react-ssr": "^2.2.6",
+    "extend": "~3.0.0",
+    "history": "^4.7.2",
+    "lodash": "^4.17.4",
+    "mockjs": "^1.0.1-beta3",
+    "moment": "^2.17.1",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-router-config": "^1.0.0-beta.4",
+    "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "antd": "^3.0.3",
+    "autod-egg": "^1.0.0",
+    "autoprefixer": "^7.1.4",
+    "conventional-changelog-cli": "^1.3.5",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-add-module-exports": "^0.2.1",
+    "babel-plugin-import": "^1.4.0",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "easywebpack-cli": "^3.11.2",
+    "easywebpack-react": "^4.2.0",
+    "egg-bin": "^4.5.0",
+    "egg-webpack": "^4.0.1",
+    "egg-webpack-react": "^2.0.2",
+    "eslint-config-egg": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "ip": "^1.1.5",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "node-sass": "^4.6.0",
+    "postcss-loader": "^2.0.8",
+    "sass-loader": "^6.0.6",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "ci": {
+    "version": "8, 9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hubcarl/egg-react-webpack-boilerplate.git"
+  },
+  "author": "hubcarl@126.com",
+  "license": "MIT",
+  "homepage": "https://github.com/hubcarl/egg-react-webpack-boilerplate"
+}
