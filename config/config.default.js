@@ -1,47 +1,24 @@
-const path = require('path');
-const fs = require('fs');
-module.exports = app => {
+'use strict';
+
+module.exports = appInfo => {
   const config = exports = {};
 
-  exports.siteFile = {
-    '/favicon.ico': fs.readFileSync(path.join(app.baseDir, 'app/web/asset/images/favicon.ico'))
-  };
+  // use for cookie sign key, should change to your own and keep security
+  config.keys = appInfo.name + '_1540970028167_8917';
 
-  exports.logger = {
-    consoleLevel: 'DEBUG',
-    dir: path.join(app.baseDir, 'logs')
-  };
+  // add your config here
+  config.middleware = [];
 
-  exports.static = {
-    prefix: '/public/',
-    dir: path.join(app.baseDir, 'public')
-  };
-
-  exports.keys = '123456';
-
-  exports.middleware = [
-    'access'
-  ];
-
-  exports.reactssr = {
-    layout: path.join(app.baseDir, 'app/web/view/layout.html')
-  };
-
-  config.sequelize = {
-    dialect: 'mysql',
-    host: '127.0.0.1',
-    port: 3306,
-    database: 'egg-sequelize-doc-default',
-    username: 'root',
-    password: 'root'
-  };
-
+  // url安全白名单设置，跨域重定向  https://eggjs.org/zh-cn/core/security.html
   config.security = {
+    domainWhiteList: [],
     csrf: {
-      headerName: 'x-csrf-token'
+      // 该路径忽略安全选项
+      ignore: /\/api|\/page/,
+      // Cookie 中的字段名，默认为 csrfToken   将 CSRF token 存在 Cookie 中字段名称
+      cookieName: 'ctoken'
     }
   };
 
-
-  return exports;
+  return config;
 };
