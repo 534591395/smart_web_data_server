@@ -6,6 +6,14 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1540970028167_8917';
 
+  // 静态模板引擎配置
+  config.view = {
+    defaultViewEngine: 'nunjucks',
+    mapping: {
+      '.html': 'nunjucks',
+    }
+  };
+
   // add your config here
   config.middleware = [];
 

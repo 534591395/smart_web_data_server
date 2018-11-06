@@ -1,7 +1,7 @@
 'use strict'
 const chalk = require('chalk')
 const semver = require('semver')
-const packageConfig = require('../package.json')
+const packageConfig = require('../../package.json')
 const shell = require('shelljs')
 
 function exec(cmd) {
@@ -32,7 +32,7 @@ module.exports = function() {
 
   for (let i = 0; i < versionRequirements.length; i++) {
     const mod = versionRequirements[i]
-
+console.log(mod);
     if (!semver.satisfies(mod.currentVersion, mod.versionRequirement)) {
       warnings.push(
         mod.name +

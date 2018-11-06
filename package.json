@@ -5,9 +5,9 @@
   "description": "",
   "author": "白云飘飘",
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config static/build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "build": "node build/build.js",
+    "build": "node static/build/build.js",
     "build:report": "npm_config_report=true npm run build",
     "lint": "eslint --ext .js,.vue src",
     "test": "npm run lint",
@@ -24,6 +24,7 @@
     "server-autod": "autod"
   },
   "dependencies": {
+    "mysql2": "^1.5.1",
     "axios": "0.18.0",
     "element-ui": "2.4.6",
     "js-cookie": "2.2.0",
@@ -37,6 +38,7 @@
     "egg-mysql": "^3.0.0",
     "egg-sequelize": "^3.1.0",
     "egg-validate": "^1.0.0",
+    "egg-view-nunjucks": "^2.1.4",
     "egg-scripts": "^2.5.0"
   },
   "devDependencies": {
@@ -97,7 +99,8 @@
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=8.9.0",
+    "npm": ">= 6.4.1"
   },
   "browserslist": [
     "> 1%",
