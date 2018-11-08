@@ -22,7 +22,7 @@ module.exports = appInfo => {
     domainWhiteList: [],
     csrf: {
       // 该路径忽略安全选项
-      ignore: /\/api|\/page/,
+      ignore: /\/api|\/admin/,
       // Cookie 中的字段名，默认为 csrfToken   将 CSRF token 存在 Cookie 中字段名称
       cookieName: 'ctoken'
     }

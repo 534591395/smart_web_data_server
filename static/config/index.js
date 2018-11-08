@@ -7,12 +7,14 @@ const path = require('path')
 module.exports = {
   dev: {
     // Paths
-    assetsSubDirectory: 'static',
-    assetsPublicPath: '/',
+    index: path.resolve(__dirname, '../../app/view/admin/index.html'),
+    assetsRoot: path.resolve(__dirname, '../../app/public/'),
+    assetsSubDirectory: 'admin',
+    assetsPublicPath: '/public/',
     proxyTable: {},
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    //host: 'localhost', // can be overwritten by process.env.HOST
     port: 9528, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
@@ -30,7 +32,7 @@ module.exports = {
     /**
      * Source Maps
      */
-
+    productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#development
     devtool: 'cheap-source-map',
 
@@ -63,7 +65,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: false,
+    productionSourceMap: true,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: 'source-map',
 
