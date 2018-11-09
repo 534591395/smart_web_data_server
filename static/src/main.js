@@ -18,8 +18,7 @@ import '@/permission' // permission control
 
 //Vue.use(ElementUI, { locale })
 Vue.use(ElementUI, { 
-  i18n: (key, value) => i18n.t(key, value),
-  locale
+  i18n: (key, value) => i18n.t(key, value)
 })
 
 Vue.config.productionTip = false
