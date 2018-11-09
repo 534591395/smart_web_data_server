@@ -11,6 +11,7 @@ module.exports = app => {
     User.add= async function(username,pass,nickname) {
         const saltRounds = 10;
         const salt = bcrypt.genSaltSync(saltRounds);
+        // 密码加盐加密（密码安全）
         const password = bcrypt.hashSync(pass, salt);
         const user= await this.create({
             username,nickname,

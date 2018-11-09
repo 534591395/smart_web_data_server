@@ -16,15 +16,17 @@ class BaseController extends Controller {
             success: true,
             msg,
             result:data,
-            total:total||0
+            total:total||0,
+            code: 200
         };
     }
-    failure(msg,data,total) {
+    failure(msg,data,total, code) {
         this.ctx.body = {
             success: false,
             msg,
             result:data,
-            total:total||0
+            total:total||0,
+            code: code
         };
     }
     notFound(msg) {

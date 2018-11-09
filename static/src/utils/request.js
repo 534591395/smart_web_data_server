@@ -26,7 +26,20 @@ service.interceptors.request.use(
 
 // response 拦截器
 service.interceptors.response.use(
-  response => response,
+  // response => response,
+  response => {
+    const res = response.data;
+    if (res.code !== 200) {
+      Message({
+        message: res.msg,
+        type: 'error',
+        duration: 3 * 1000
+      })
+      return Promise.reject('error')
+    } else {
+      return response.data;
+    }
+  },
   // response => {
   //   /**
   //    * code为非20000是抛错 可结合自己业务进行修改

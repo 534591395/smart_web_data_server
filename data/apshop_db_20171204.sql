@@ -201,7 +201,7 @@ loginString			VARCHAR(100) NOT NULL			COMMENT '登录识别串, 由User表填加
 uid					INT								COMMENT '用户内码',
 password			VARCHAR(100) NOT NULL			COMMENT '加密的登录密码',
 salt				VARCHAR(100) NOT NULL			COMMENT '加密盐',
-status				CHAR(1) DEFAULT '0' NOT NULL	COMMENT '状态(冗余, *, 0=正常, S=失效)',
+status				CHAR(1) DEFAULT '0' NOT NULL	COMMENT '登陆状态(冗余, *, 0=正常, S=失效)',
 CONSTRAINT PK_userLogin PRIMARY KEY(loginString)
 );
 ALTER TABLE userLogin COMMENT= '用户登录识别表';
