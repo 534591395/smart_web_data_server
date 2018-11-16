@@ -16,6 +16,8 @@ module.exports = app => {
   app.post('/admin/api/logout', app.controller.admin.login.logout);
   // 获取登陆用户信息
   app.get('/admin/api/user/info', app.controller.admin.user.info);
+  // 商品列表
+  app.get('/admin/api/goods/list', app.controller.admin.goods.list);
 };
 
 
