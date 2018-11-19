@@ -25,33 +25,40 @@
       fit
       highlight-current-row
       style="width: 100%;">
-      <el-table-column :label="$t('table.id')" align="center" width="65">
+      <el-table-column :label="$t('table.id')" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.goodsID }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.date')" width="150px" align="center">
+      <el-table-column :label="$t('table.date')"  align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.opAt }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.title')" min-width="150px">
+      <el-table-column :label="$t('table.title')" >
         <template slot-scope="scope">
           <span class="link-type" @click="handleUpdate(scope.row)">{{ scope.row.title }}</span>
-          <el-tag>{{ scope.row.goodsType }}</el-tag>
         </template>
       </el-table-column>
-      <!-- <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column :label="$t('table.type')"  align="center">
         <template slot-scope="scope">
-          <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">{{ $t('table.edit') }}</el-button>
+          <span>{{ scope.row.goodsType }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('table.price')"  align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.price }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
+        <template slot-scope="scope">
           <el-button v-if="scope.row.status!='published'" size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">{{ $t('table.publish') }}
-          </el-button>
-          <el-button v-if="scope.row.status!='draft'" size="mini" @click="handleModifyStatus(scope.row,'draft')">{{ $t('table.draft') }}
           </el-button>
           <el-button v-if="scope.row.status!='deleted'" size="mini" type="danger" @click="handleModifyStatus(scope.row,'deleted')">{{ $t('table.delete') }}
           </el-button>
+          <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">推荐</el-button>
         </template>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
