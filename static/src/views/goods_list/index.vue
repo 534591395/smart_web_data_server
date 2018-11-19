@@ -50,6 +50,21 @@
           <span>{{ scope.row.price }}</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('table.numSale')"  align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.numSale }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('table.recommendFlag')"  align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.recommendFlag }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('table.goodsStatus')"  align="center">
+        <template slot-scope="scope">
+          <span>{{ scope.row.goodsStatus }}</span>
+        </template>
+      </el-table-column>
       <el-table-column :label="$t('table.actions')" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button v-if="scope.row.status!='published'" size="mini" type="success" @click="handleModifyStatus(scope.row,'published')">{{ $t('table.publish') }}

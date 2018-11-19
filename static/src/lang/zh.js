@@ -127,7 +127,9 @@ export default {
     cancel: '取 消',
     confirm: '确 定',
     price: '单价',
-    goodsStatus: ''
+    goodsStatus: '状态',
+    numSale: '销售量',
+    recommendFlag: '是否推荐'
   },
   errorLog: {
     tips: '请点击右上角bug小图标',
