@@ -7,3 +7,10 @@ export function getList(params) {
     params
   })
 }
+export function create(params) {
+  return request({
+  url: '/admin/api/goods/create',
+  method: 'post',
+  data: params
+  })
+}
