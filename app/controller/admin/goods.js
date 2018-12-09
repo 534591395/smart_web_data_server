@@ -40,8 +40,28 @@
 'use strict';
 
 const BaseController = require('../../core/baseController');
+const moment = require('moment');
 
 class GoodsController extends BaseController {
+  // 创建\修改商品  
+  async create(ctx) {
+    const {goodsID,name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,goodsImages,recommendFlag}= ctx.request.body;
+    const opAt = moment();
+    // 修改商品
+    if (goodsID) {
+        const goods = await ctx.model.ShopGoods.findById(goodsID);
+        if (!goods) {
+            this.failure('保存失败，未查询到商品相关信息！');
+        } else {
+            goods.update({
+                name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
+            });
+        }
+    } else {
+
+    }
+  }  
+  // 商品列表  
   async list(ctx) {
     const { title, page, limit, type } = ctx.query;
     if (

@@ -76,12 +76,12 @@ var constantRouterMap = [{ path: '/login', component: function component() {
     },
     meta: { title: '商品列表', icon: 'table' }
   }, {
-    path: '/goods/add',
+    path: '/goods/create',
     name: '新增商品',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ "chunk-2868b").then(__webpack_require__.bind(null, /*! @/views/tree/index */ "ad09"));
+      return __webpack_require__.e(/*! import() */ "dzKh").then(__webpack_require__.bind(null, /*! @/views/goods/index */ "dzKh"));
     },
-    meta: { title: 'Tree', icon: 'tree' }
+    meta: { title: '新增商品', icon: 'edit' }
   }]
 }, {
   path: 'external-link',
