@@ -61,10 +61,10 @@ export const constantRouterMap = [
         meta: { title: '商品列表', icon: 'table' }
       },
       {
-        path: '/goods/add',
+        path: '/goods/create',
         name: '新增商品',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        component: () => import('@/views/goods/index'),
+        meta: { title: '新增商品', icon: 'edit' }
       }
     ]
   },
