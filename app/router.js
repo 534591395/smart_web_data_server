@@ -18,6 +18,14 @@ module.exports = app => {
   app.get('/admin/api/user/info', app.controller.admin.user.info);
   // 商品列表
   app.get('/admin/api/goods/list', app.controller.admin.goods.list);
+  // 创建商品
+  app.post('/admin/api/goods/create', app.controller.admin.goods.create);
+  // 编辑商品
+  app.post('/admin/api/goods/edit', app.controller.admin.goods.create);
+
+  // 上传文件
+  app.post('/admin/upload/:type', app.controller.file.upload);
+
 };
 
 

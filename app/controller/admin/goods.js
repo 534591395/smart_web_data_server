@@ -52,14 +52,31 @@ class GoodsController extends BaseController {
         const goods = await ctx.model.ShopGoods.findById(goodsID);
         if (!goods) {
             this.failure('保存失败，未查询到商品相关信息！');
+            return;
         } else {
             goods.update({
                 name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
             });
+            await ctx.model.query("DELETE FROM `shop_goodsImages` where goodsID = :goodsID", { replacements: { goodsID }, type: ctx.model.QueryTypes.DELETE });
+            for (let index in goodsImages) {
+                await ctx.model.ShopGoodsImages.create({
+                    goodsID: goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
+                });
+            }
         }
-    } else {
-
     }
+    // 新增商品 
+    else {
+        await ctx.model.ShopGoods.create({
+            name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
+        });
+        for (let index in goodsImages) {
+            await ctx.model.ShopGoodsImages.create({
+                goodsID: goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
+            });
+        }
+    }
+    this.success("保存成功！");
   }  
   // 商品列表  
   async list(ctx) {
