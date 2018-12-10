@@ -132,6 +132,19 @@ class GoodsController extends BaseController {
     });
     this.success('查询成功', result.rows, result.count);
   }
+  // 商品推荐
+  async recommend(ctx) {
+    const { recommendFlag, goodsID } = ctx.request.body;
+    const goods = await ctx.model.ShopGoods.findById(goodsID);
+    if (!goods) {
+        this.failure("操作失败，未查询到商品相关信息！");
+        return;
+    }
+    goods.update({
+        recommendFlag
+    });
+    this.success("操作成功");
+  }
 }
 
 module.exports = GoodsController;

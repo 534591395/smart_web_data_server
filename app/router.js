@@ -22,6 +22,8 @@ module.exports = app => {
   app.post('/admin/api/goods/create', app.controller.admin.goods.create);
   // 编辑商品
   app.post('/admin/api/goods/edit', app.controller.admin.goods.create);
+  // 商品推荐状态更改
+  app.post('/admin/api/goods/recommend', app.controller.admin.goods.recommend);
 
   // 上传文件
   app.post('/admin/upload/:type', app.controller.admin.file.upload);
