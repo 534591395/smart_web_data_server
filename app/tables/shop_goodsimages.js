@@ -26,6 +26,6 @@ module.exports = function(sequelize, DataTypes) {
         defaultValue: '0'
       }
     }, {
-      tableName: 'shop_goodsimages'
+      tableName: 'shop_goodsImages'
     });
 };

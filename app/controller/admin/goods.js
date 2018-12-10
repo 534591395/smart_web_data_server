@@ -42,6 +42,11 @@
 const BaseController = require('../../core/baseController');
 const moment = require('moment');
 
+// 注意：ShopGoods表中  goodsID 是主键，故本类中查询某个商品使用了 ctx.model.ShopGoods.findById(goodsID) 方法
+// 若通过其他非主键字段查询，可使用：ctx.model.ShopGoods.findOne({where:{goodsID:ctx.params.goodsID},raw:true})
+// Sequelize 文档 https://itbilu.com/nodejs/npm/V1PExztfb.html#api-findOne
+// Sequelize 接口对应的 sql语句： https://segmentfault.com/a/1190000003987871
+
 class GoodsController extends BaseController {
   // 创建\修改商品  
   async create(ctx) {
@@ -64,8 +69,9 @@ class GoodsController extends BaseController {
                 this.failure(error);
                 return;
             }
-            
+            // 删除该商品原先对应的图片
             await ctx.model.query("DELETE FROM `shop_goodsImages` where goodsID = :goodsID", { replacements: { goodsID }, type: ctx.model.QueryTypes.DELETE });
+            // 重新设置该商品对应的图片
             for (let index in goodsImages) {
                 await ctx.model.ShopGoodsImages.create({
                     goodsID: goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
@@ -83,7 +89,7 @@ class GoodsController extends BaseController {
             this.failure(error);
             return;
         }
-
+        // 设置该商品对应的图片
         for (let index in goodsImages) {
             await ctx.model.ShopGoodsImages.create({
                 goodsID: goods.goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
@@ -158,7 +164,50 @@ class GoodsController extends BaseController {
       });
       this.success("状态更新成功！");
   }
-
+  // 删除指定商品
+  async del(ctx) {
+      const { goodsID } = ctx.params;
+      const goods = await ctx.model.ShopGoods.findById(goodsID);
+      if (!goods) {
+        this.failure("删除失败，未找到该商品！");
+        return;
+      }
+      if (goods.goodsStatus === 'U') {
+        this.failure("上架商品不允许删除，请先下架！");
+        return;
+      }
+      goods.destroy();
+      this.success('删除成功！');
+  }
+  // 查询指定商品详细信息
+  async detail(ctx) {
+      const { goodsID } = ctx.query;
+      if (!goodsID) {
+        this.failure("操作失败，参数错误！");
+        return;
+      }
+      const goods = await ctx.model.ShopGoods.findById(goodsID);
+      if (!goods) {
+          this.failure("操作失败，未查询到商品相关信息！");
+          return;
+      }
+      // 查询该商品对应的商品图片列表
+      // 下面排序对应的 sql： SELECT * FROM `ShopGoodsImages` WHERE `ShopGoodsImages`.`goodsID`  ORDER BY `ShopGoodsImages`.`sortNo` ASC
+      // 排序: 默认是 ASC（升序，从小到大），降序（DESC）
+      const goodsImages = await ctx.model.ShopGoodsImages.findAll({
+          where: {
+            goodsID: goods.goodsID
+          },
+          order: [["sortNo", "ASC"]],
+          raw:true
+      });
+      const imgArr = [];
+      for (let img of goodsImages) {
+        imgArr.push({name: img.name, url: img.imgurl});
+      }
+      goods.goodsImages = imgArr;
+      this.success("查询成功！", goods);
+  }
 }
 
 module.exports = GoodsController;
