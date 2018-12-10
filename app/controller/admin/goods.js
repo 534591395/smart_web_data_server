@@ -145,6 +145,20 @@ class GoodsController extends BaseController {
     });
     this.success("操作成功");
   }
+  // 商品状态：D:下架,U:上架
+  async status(ctx) {
+      const { goodsStatus, goodsID } = ctx.request.body;
+      const goods = await ctx.model.ShopGoods.findById(goodsID);
+      if (!goods) {
+          this.failure("操作失败，未查询到商品相关信息！");
+          return;
+      }
+      goods.update({
+        goodsStatus
+      });
+      this.success("状态更新成功！");
+  }
+
 }
 
 module.exports = GoodsController;

@@ -24,6 +24,8 @@ module.exports = app => {
   app.post('/admin/api/goods/edit', app.controller.admin.goods.create);
   // 商品推荐状态更改
   app.post('/admin/api/goods/recommend', app.controller.admin.goods.recommend);
+  // 商品上\下架状态更改  goodsStatus==  D:下架,U:上架
+  app.post('/admin/api/goods/status', app.controller.admin.goods.status);
 
   // 上传文件
   app.post('/admin/upload/:type', app.controller.admin.file.upload);
