@@ -49,15 +49,22 @@ class GoodsController extends BaseController {
     const opAt = moment();
     let goods;
     // 修改商品
+
     if (goodsID) {
         goods = await ctx.model.ShopGoods.findById(goodsID);
         if (!goods) {
             this.failure('保存失败，未查询到商品相关信息！');
             return;
         } else {
-            goods.update({
-                name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
-            });
+            try {
+                await goods.update({
+                    name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
+                });
+            } catch (error) {
+                this.failure(error);
+                return;
+            }
+            
             await ctx.model.query("DELETE FROM `shop_goodsImages` where goodsID = :goodsID", { replacements: { goodsID }, type: ctx.model.QueryTypes.DELETE });
             for (let index in goodsImages) {
                 await ctx.model.ShopGoodsImages.create({
@@ -68,9 +75,15 @@ class GoodsController extends BaseController {
     }
     // 新增商品 
     else {
-        goods = await ctx.model.ShopGoods.create({
-            name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
-        });
+        try {
+            goods = await ctx.model.ShopGoods.create({
+                name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
+            });
+        } catch (error) {
+            this.failure(error);
+            return;
+        }
+
         for (let index in goodsImages) {
             await ctx.model.ShopGoodsImages.create({
                 goodsID: goods.goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
