@@ -47,9 +47,10 @@ class GoodsController extends BaseController {
   async create(ctx) {
     const {goodsID,name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,goodsImages,recommendFlag}= ctx.request.body;
     const opAt = moment();
+    let goods;
     // 修改商品
     if (goodsID) {
-        const goods = await ctx.model.ShopGoods.findById(goodsID);
+        goods = await ctx.model.ShopGoods.findById(goodsID);
         if (!goods) {
             this.failure('保存失败，未查询到商品相关信息！');
             return;
@@ -67,12 +68,12 @@ class GoodsController extends BaseController {
     }
     // 新增商品 
     else {
-        await ctx.model.ShopGoods.create({
+        goods = await ctx.model.ShopGoods.create({
             name, title,goodsType,imgurl,price,priceMarket,stock,note,goodsStatus,sortNo,opBy,opAt,recommendFlag
         });
         for (let index in goodsImages) {
             await ctx.model.ShopGoodsImages.create({
-                goodsID: goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
+                goodsID: goods.goodsID, imgurl: goodsImages[index].url, name: goodsImages[index].name, sortNo: index
             });
         }
     }
