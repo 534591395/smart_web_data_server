@@ -24,7 +24,7 @@ module.exports = app => {
   app.post('/admin/api/goods/edit', app.controller.admin.goods.create);
 
   // 上传文件
-  app.post('/admin/upload/:type', app.controller.file.upload);
+  app.post('/admin/upload/:type', app.controller.admin.file.upload);
 
 };
 
